@@ -46,13 +46,13 @@ provision:
     with:
       # Path to manifest template
       manifestPath: ./teams_app_manifest/manifest.json
-      outputZipPath: ./build/appPackage.${{TEAMSFX_ENV}}.zip
-      outputJsonPath: ./build/manifest.${{TEAMSFX_ENV}}.json
+      outputZipPath: ./teams_app_manifest/build/appPackage.${{TEAMSFX_ENV}}.zip
+      outputJsonPath: ./teams_app_manifest/build/manifest.${{TEAMSFX_ENV}}.json
   # Validate app package using validation rules
   - uses: teamsApp/validateAppPackage
     with:
       # Relative path to this file. This is the path for built zip file.
-      appPackagePath: ./build/appPackage.${{TEAMSFX_ENV}}.zip
+      appPackagePath: ./teams_app_manifest/build/appPackage.${{TEAMSFX_ENV}}.zip
 
   # Apply the Teams app manifest to an existing Teams app in
   # Teams Developer Portal.
@@ -60,7 +60,7 @@ provision:
   - uses: teamsApp/update
     with:
       # Relative path to this file. This is the path for built zip file.
-      appPackagePath: ./build/appPackage.${{TEAMSFX_ENV}}.zip
+      appPackagePath: ./teams_app_manifest/build/appPackage.${{TEAMSFX_ENV}}.zip
 
 deploy:
   # Generate runtime environment variables
