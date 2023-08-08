@@ -62,6 +62,13 @@
                 "hidden": true
             },
             "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
         }
     ],
     "compounds": [
@@ -69,7 +76,8 @@
             "name": "Debug (Edge)",
             "configurations": [
                 "Launch App (Edge)",
-                "Attach to Local Service"
+                "Attach to Local Service",
+                "Python: Current File"
             ],
             "preLaunchTask": "Start Teams App Locally",
             "presentation": {

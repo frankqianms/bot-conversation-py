@@ -10,8 +10,7 @@
                 "Validate prerequisites",
                 "Start local tunnel",
                 "Provision",
-                "Deploy",
-                "Start application"
+                "Deploy"
             ],
             "dependsOrder": "sequence"
         },
@@ -75,30 +74,6 @@
             "command": "deploy",
             "args": {
                 "env": "local"
-            }
-        },
-        {
-            "label": "Start application",
-            "type": "shell",
-            "command": "python app.py",
-            "isBackground": true,
-            "options": {
-                "cwd": "${workspaceFolder}"
-            },
-            "problemMatcher": {
-                "pattern": [
-                    {
-                        "regexp": "^.*$",
-                        "file": 0,
-                        "location": 1,
-                        "message": 2
-                    }
-                ],
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": "^.*Running on http://localhost:3978.*",
-                    "endsPattern": "^.*Press CTRL\\+C to quit.*"
-                }
             }
         }
     ]
