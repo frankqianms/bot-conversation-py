@@ -69,6 +69,10 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
+            "presentation": {
+                "group": "all",
+                "hidden": true
+            },
         }
     ],
     "compounds": [
@@ -90,7 +94,8 @@
             "name": "Debug (Chrome)",
             "configurations": [
                 "Launch App (Chrome)",
-                "Attach to Local Service"
+                "Attach to Local Service",
+                "Python: Current File"
             ],
             "preLaunchTask": "Start Teams App Locally",
             "presentation": {
