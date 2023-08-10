@@ -50,9 +50,7 @@ Please find below demo manifest which is deployed on Microsoft Azure and you can
 
 2) Install dependencies by running ```pip install -r requirements.txt``` in the project folder.
 
-3) Open `app.py` in the VS Code editor.
-
-4) If you have already installed `Teams Toolkit` in VS Code, then just run `F5` to start local debugging. Or you can follow this [doc](https://github.com/frankqianms/bot-conversation-py#to-try-this-sample) to run the bot.
+3) If you have already installed `Teams Toolkit` in VS Code, then just run `F5` to start local debugging. Or you can follow this [doc](https://github.com/frankqianms/bot-conversation-py#to-try-this-sample) to run the bot.
 
 ## Interacting with the bot
 
