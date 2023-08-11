@@ -88,7 +88,7 @@ To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](htt
 
 ## Known issues
 
-1) When you run `pip install -r requirements.txt`, you might encounter the error: `Cannot open include file: 'longintrepr.h'`. Please follow this [blog](https://stackoverflow.com/questions/74979674/gensim-install-in-python-3-11-fails-because-of-missing-longintrepr-h-file) to resolve it.
+1) When you run `pip install -r requirements.txt` using python3.11, you might encounter the error: `Cannot open include file: 'longintrepr.h'`. Please follow this [blog](https://stackoverflow.com/questions/74979674/gensim-install-in-python-3-11-fails-because-of-missing-longintrepr-h-file) to resolve it.
 
 2) The `Python: Current File` launcher might fail to launch when you try to run `Debug (Edge)` or `Debug (Chrome)`. Please run `Python: Current File` first, and then run `Debug (Edge)` or `Debug (Chrome)`.
 
