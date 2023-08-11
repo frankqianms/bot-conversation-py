@@ -1,4 +1,8 @@
 requests==2.23.0
-botbuilder-integration-aiohttp>=4.14.0
+# botbuilder-integration-aiohttp==4.14.0
+botbuilder
+botbuilder.core
+botbuilder.schema
+aiohttp
 langchain>=0.0.24
 openai>=0.2.0
