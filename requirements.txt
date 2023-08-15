@@ -4,5 +4,6 @@ botbuilder
 botbuilder.core
 botbuilder.schema
 aiohttp
+google-search-results
 langchain>=0.0.24
 openai>=0.2.0
