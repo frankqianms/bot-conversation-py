@@ -1,6 +1,6 @@
 # agents
-from bots.utils.agent import FakeAgent
 from bots.utils.agent import agent
+from bots.utils.prompt import prompt
 
 async def askAI(query: str):
     # question prompt
@@ -9,6 +9,6 @@ async def askAI(query: str):
     # )
     # prompt_template.format(query=query)
     # ask question
-    answer = agent.run(query)
+    answer = agent.run(prompt(query))
     # answer = llm(query)
     return answer

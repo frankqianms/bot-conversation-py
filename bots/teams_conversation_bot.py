@@ -10,7 +10,7 @@ from botbuilder.core.teams import TeamsActivityHandler, TeamsInfo
 from botbuilder.schema import CardAction, HeroCard, Mention, ConversationParameters, Attachment, Activity
 from botbuilder.schema.teams import TeamInfo, TeamsChannelAccount
 from botbuilder.schema._connector_client_enums import ActionTypes
-from bots.utils import askAI
+from bots.askAI import askAI
 
 ADAPTIVECARDTEMPLATE = "resources/UserMentionCardTemplate.json"
 
@@ -51,9 +51,9 @@ class TeamsConversationBot(TeamsActivityHandler):
             await self._message_all_members(turn_context)
             return
 
-        if "who" in text:
-            await self._get_member(turn_context)
-            return
+        # if "who" in text:
+        #     await self._get_member(turn_context)
+        #     return
 
         if "delete" in text:
             await self._delete_card_activity(turn_context)
@@ -63,6 +63,7 @@ class TeamsConversationBot(TeamsActivityHandler):
             await self._query_ai_activity(turn_context, text)
             return
 
+        await self._query_ai_activity(turn_context, text)
         await self._send_card(turn_context, False)
         return
 
