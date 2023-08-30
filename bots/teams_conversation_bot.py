@@ -10,7 +10,8 @@ from botbuilder.core.teams import TeamsActivityHandler, TeamsInfo
 from botbuilder.schema import CardAction, HeroCard, Mention, ConversationParameters, Attachment, Activity
 from botbuilder.schema.teams import TeamInfo, TeamsChannelAccount
 from botbuilder.schema._connector_client_enums import ActionTypes
-from bots.askAI import askAI
+from bots.askAI import AIAsker
+from bots.utils.loader import Loader
 
 ADAPTIVECARDTEMPLATE = "resources/UserMentionCardTemplate.json"
 
@@ -18,6 +19,8 @@ class TeamsConversationBot(TeamsActivityHandler):
     def __init__(self, app_id: str, app_password: str):
         self._app_id = app_id
         self._app_password = app_password
+        self._aiasker = None
+        self._loader = None
 
     async def on_teams_members_added(  # pylint: disable=unused-argument
         self,
@@ -35,36 +38,46 @@ class TeamsConversationBot(TeamsActivityHandler):
         TurnContext.remove_recipient_mention(turn_context.activity)
         text = turn_context.activity.text.strip().lower()
 
-        if "mention me" in text:
-            await self._mention_adaptive_card_activity(turn_context)
-            return
-
-        if "mention" in text:
-            await self._mention_activity(turn_context)
-            return
-
-        if "update" in text:
-            await self._send_card(turn_context, True)
-            return
-
-        if "message" in text:
-            await self._message_all_members(turn_context)
-            return
-
-        # if "who" in text:
-        #     await self._get_member(turn_context)
+        # if "mention me" in text:
+        #     await self._mention_adaptive_card_activity(turn_context)
         #     return
 
-        if "delete" in text:
-            await self._delete_card_activity(turn_context)
-            return
-        
-        if "query" in text:
-            await self._query_ai_activity(turn_context, text)
-            return
+        # if "mention" in text:
+        #     await self._mention_activity(turn_context)
+        #     return
 
-        await self._query_ai_activity(turn_context, text)
-        await self._send_card(turn_context, False)
+        # if "update" in text:
+        #     await self._send_card(turn_context, True)
+        #     return
+
+        # if "message" in text:
+        #     await self._message_all_members(turn_context)
+        #     return
+
+        # # if "who" in text:
+        # #     await self._get_member(turn_context)
+        # #     return
+
+        # if "delete" in text:
+        #     await self._delete_card_activity(turn_context)
+        #     return
+        
+        # if "query" in text:
+        #     await self._query_ai_activity(turn_context, text)
+        #     return
+
+        if "load" in text:
+            await turn_context.send_activity("loading file...")
+            self._loader = Loader()
+            await self._loader.load_file(text.replace("load", "").strip())
+            await turn_context.send_activity("file loaded.")
+        elif "split" in text:
+            await turn_context.send_activity("splitting...")
+            await self._loader.split()
+            await turn_context.send_activity("split finished.")
+        else:
+            await self._query_ai_activity(turn_context, text, self._loader)
+        # await self._send_card(turn_context, False)
         return
 
     async def _mention_adaptive_card_activity(self, turn_context: TurnContext):
@@ -232,6 +245,10 @@ class TeamsConversationBot(TeamsActivityHandler):
     async def _delete_card_activity(self, turn_context: TurnContext):
         await turn_context.delete_activity(turn_context.activity.reply_to_id)
 
-    async def _query_ai_activity(selt, turn_context: TurnContext, text: str):
-        answer = await askAI(text)
-        await turn_context.send_activity("Querying AI...\n answer: " + answer)
+    async def _query_ai_activity(self, turn_context: TurnContext, text: str, loader):
+        await turn_context.send_activity("Querying AI...")
+        if self._aiasker is None:
+            self._aiasker = AIAsker(loader=self._loader)
+            
+        answer = await self._aiasker.askAI(text, loader)
+        await turn_context.send_activity("Answer: " + answer)
