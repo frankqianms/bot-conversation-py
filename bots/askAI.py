@@ -13,6 +13,9 @@ class AIAsker:
         self._loader = loader
         self._chat_history = []
         self._answer = None
+        self._memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+        self._docs = None
+        self._vectorstore = None
 
     async def askAI(self, query: str, loader=None):
         # question prompt
@@ -22,10 +25,10 @@ class AIAsker:
         # prompt_template.format(query=query)
         # ask question
         # answer = agent.run(prompt(query))
-        docs = await loader.split()
-        vectorstore = await create_vectorstore(docs)
-        memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
-        qa = ConversationalRetrievalChain.from_llm(llm, vectorstore.as_retriever(), memory=memory)
+        if self._docs is None:
+            docs = await loader.split()
+            self._vectorstore = await create_vectorstore(docs)
+        qa = ConversationalRetrievalChain.from_llm(llm, self._vectorstore.as_retriever(), memory=self._memory)
         self._chat_history = [(query, self._answer["answer"] if self._answer else "")]
         self._answer = qa({"question": query, "chat_history": self._chat_history})
         # index = create_index(loader)

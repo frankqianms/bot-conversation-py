@@ -10,7 +10,7 @@ class Loader:
         self._loader = None
 
     async def load_file(self, file_path=None):
-        if (file_path is None):
+        if (file_path is None or file_path == ""):
             file_path = "./files/article.txt"
         # self._loader = UnstructuredPDFLoader(file_path)
         self._loader = TextLoader(file_path, "utf-8")

@@ -248,7 +248,7 @@ class TeamsConversationBot(TeamsActivityHandler):
     async def _query_ai_activity(self, turn_context: TurnContext, text: str, loader):
         await turn_context.send_activity("Querying AI...")
         if self._aiasker is None:
-            self._aiasker = AIAsker(loader=self._loader)
+            self._aiasker = AIAsker(loader=loader)
             
         answer = await self._aiasker.askAI(text, loader)
         await turn_context.send_activity("Answer: " + answer)
