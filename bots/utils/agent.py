@@ -86,7 +86,7 @@ from bots.utils.models import llm
 # agent = PlanAndExecute(planner=planner, executor=executor, verbose=True)
 
 ## conversational agent
-def create_agent(tool, loader=None):
+def create_agent(tool):
     tools = load_tools(["bing-search", "llm-math"], llm=llm)
     tools.append(tool)
     memory = ConversationBufferMemory(memory_key="chat_history")

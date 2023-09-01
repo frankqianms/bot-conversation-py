@@ -32,9 +32,9 @@ class AIAsker:
             docs = await loader.split()
             self._vectorstore = await create_vectorstore(docs)
 
+        self._chat_history = [(query, self._answer if self._answer else "")]
         if self._agent is None:
             qa = ConversationalRetrievalChain.from_llm(llm, self._vectorstore.as_retriever(), memory=self._memory)
-            self._chat_history = [(query, self._answer if self._answer else "")]
             tool = Tool(
                 name='ConversationalRetrievalChain', 
                 func = lambda query: qa({"question": query, "chat_history": self._chat_history}), 
@@ -45,10 +45,8 @@ class AIAsker:
             memory = ConversationBufferMemory(memory_key="chat_history")
             agent_chain = initialize_agent(tools, llm, agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION, verbose=True, memory=memory, handle_parsing_errors=True)
             self._agent = agent_chain
-            # agent = create_agent(tool, loader)
+            # self._agent = create_agent(tool)
+            
 
         self._answer = self._agent.run(query)
-        # index = create_index(loader)
-        # answer = index.query(query, llm=llm)
-        # answer = llm(query)
         return self._answer
