@@ -29,7 +29,7 @@ embedding = OpenAIEmbeddings(
 
 async def create_vectorstore(docs):
     print("creating vectorstore...")
-    vectorestore = Chroma.from_documents(documents=docs, embedding=embedding)
+    vectorestore = Chroma.from_documents(documents=docs, embedding=embedding) if docs else None
     print("vectorstore created")
     return vectorestore
 

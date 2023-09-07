@@ -4,3 +4,6 @@ botbuilder
 botbuilder.core
 botbuilder.schema
 aiohttp
+langchain
+openapi_schema_pydantic
+

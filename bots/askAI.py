@@ -29,19 +29,20 @@ class AIAsker:
         # ask question
         # answer = agent.run(prompt(query))
         if self._docs is None:
-            docs = await loader.split()
+            docs = await loader.split() if loader else None
             self._vectorstore = await create_vectorstore(docs)
 
         self._chat_history = [(query, self._answer if self._answer else "")]
         if self._agent is None:
-            qa = ConversationalRetrievalChain.from_llm(llm, self._vectorstore.as_retriever(), memory=self._memory)
-            tool = Tool(
-                name='ConversationalRetrievalChain', 
-                func = lambda query: qa({"question": query, "chat_history": self._chat_history}), 
-                description = 'useful for when you need to answer questions about current files' 
-            )
             tools = load_tools(["bing-search", "llm-math"], llm=llm)
-            tools.append(tool)
+            if self._vectorstore:
+                qa = ConversationalRetrievalChain.from_llm(llm, self._vectorstore.as_retriever(), memory=self._memory)
+                tool = Tool(
+                    name='ConversationalRetrievalChain', 
+                    func = lambda query: qa({"question": query, "chat_history": self._chat_history}), 
+                    description = 'useful for when you need to answer questions about current files' 
+                )
+                tools.append(tool)
             memory = ConversationBufferMemory(memory_key="chat_history")
             agent_chain = initialize_agent(tools, llm, agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION, verbose=True, memory=memory, handle_parsing_errors=True)
             self._agent = agent_chain

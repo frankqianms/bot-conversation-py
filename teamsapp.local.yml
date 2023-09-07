@@ -8,7 +8,10 @@ provision:
   - uses: script
     with:
       run: |
-        pip install -r requirements.txt
+        python -m venv .venv
+        .venv/Scripts/activate
+        pip install -r requirements.txt 
+        pip install --upgrade openai
 
   # Creates a Teams app
   - uses: teamsApp/create
