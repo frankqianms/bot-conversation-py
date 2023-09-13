@@ -64,10 +64,14 @@
             "internalConsoleOptions": "neverOpen"
         },
         {
-            "name": "Python: Current File",
+            "name": "Python: Run App Locally",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/app.py",
+            // "cwd": "${workspaceFolder}",
+            // "env": {
+            //     "PYTHONPATH": ".venv/Scripts/python.exe"
+            // },
             "console": "integratedTerminal",
         }
     ],
@@ -77,7 +81,7 @@
             "configurations": [
                 "Launch App (Edge)",
                 "Attach to Local Service",
-                "Python: Current File"
+                "Python: Run App Locally"
             ],
             "preLaunchTask": "Start Teams App Locally",
             "presentation": {
@@ -91,7 +95,7 @@
             "configurations": [
                 "Launch App (Chrome)",
                 "Attach to Local Service",
-                "Python: Current File"
+                "Python: Run App Locally"
             ],
             "preLaunchTask": "Start Teams App Locally",
             "presentation": {
