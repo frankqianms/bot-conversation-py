@@ -4,19 +4,6 @@
 version: 1.0.0
 
 provision:
-  # Create a local debug environment
-  - uses: script
-    with:
-      run: |
-        python -m venv .venv
-
-  # pip install dependencies
-  - uses: script
-    with:
-      run: |
-        .venv/Scripts/activate
-        pip install -r requirements.txt
-
   # Creates a Teams app
   - uses: teamsApp/create
     with:
