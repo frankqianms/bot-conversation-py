@@ -10,7 +10,7 @@ provision:
       run: |
         python -m venv .venv
 
-  # prerequisite: pip install
+  # pip install dependencies
   - uses: script
     with:
       run: |
