@@ -1,25 +1,13 @@
----
-page_type: sample
-description: This sample app demonstrates use of different bot conversation events available in bot framework v4 for personal and teams scope.
-products:
-- office-teams
-- office
-- office-365
-languages:
-- python
-extensions:
- contentType: samples
- createdDate: "12-12-2019 13:38:25"
-urlFragment: officedev-microsoft-teams-samples-bot-conversation-python
-
----
-
 # Teams Conversation Bot
 
 Bot Framework v4 Conversation Bot sample for Teams ([Messages in bot conversations](https://learn.microsoft.com/microsoftteams/platform/bots/how-to/conversations/conversation-messages?tabs=dotnet)).
 
 This bot has been created using [Bot Framework](https://dev.botframework.com). This sample shows
 how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
+
+## How to run the app using VS Code
+1. Trigger `Python: Create Environment` command to create a new virtual environment. This step is optional but recommended to take. If you don't create a virtual environment, the dependencies will be installed to your global Python environment.
+1. Press `F5` to launch the app, which installs the dependencies first and then runs the app.
 
 ## Included Features
 * Bots
@@ -112,6 +100,12 @@ The bot initialization message
 ## Deploy the bot to Azure
 
 To learn more about deploying a bot to Azure, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete list of deployment instructions.
+
+## Known issues
+
+1) When you run `pip install -r requirements.txt` using python3.11, you might encounter the error: `Cannot open include file: 'longintrepr.h'`. Please follow this [blog](https://stackoverflow.com/questions/74979674/gensim-install-in-python-3-11-fails-because-of-missing-longintrepr-h-file) to resolve it.
+
+2) The `Python: Current File` launcher might fail to launch when you try to run `Debug (Edge)` or `Debug (Chrome)`. Please run `Python: Current File` first, and then run `Debug (Edge)` or `Debug (Chrome)`.
 
 # Further reading
 

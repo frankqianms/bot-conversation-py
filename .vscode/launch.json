@@ -2,28 +2,6 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Remote (Edge)",
-            "type": "msedge",
-            "request": "launch",
-            "url": "https://teams.microsoft.com/l/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
-            "presentation": {
-                "group": "remote",
-                "order": 1
-            },
-            "internalConsoleOptions": "neverOpen"
-        },
-        {
-            "name": "Launch Remote (Chrome)",
-            "type": "chrome",
-            "request": "launch",
-            "url": "https://teams.microsoft.com/l/app/${{TEAMS_APP_ID}}?installAppPackage=true&webjoin=true&${account-hint}",
-            "presentation": {
-                "group": "remote",
-                "order": 2
-            },
-            "internalConsoleOptions": "neverOpen"
-        },
-        {
             "name": "Launch App (Edge)",
             "type": "msedge",
             "request": "launch",
@@ -64,15 +42,15 @@
             "internalConsoleOptions": "neverOpen"
         },
         {
-            "name": "Python: Current File",
+            "name": "Python: Run App Locally",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/app.py",
-            "console": "integratedTerminal",
-            "presentation": {
-                "group": "all",
-                "hidden": true
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${command:python.interpreterPath}"
             },
+            "console": "integratedTerminal",
         }
     ],
     "compounds": [
@@ -81,7 +59,7 @@
             "configurations": [
                 "Launch App (Edge)",
                 "Attach to Local Service",
-                "Python: Current File"
+                "Python: Run App Locally"
             ],
             "preLaunchTask": "Start Teams App Locally",
             "presentation": {
@@ -95,7 +73,7 @@
             "configurations": [
                 "Launch App (Chrome)",
                 "Attach to Local Service",
-                "Python: Current File"
+                "Python: Run App Locally"
             ],
             "preLaunchTask": "Start Teams App Locally",
             "presentation": {

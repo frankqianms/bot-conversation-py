@@ -8,6 +8,7 @@
             "label": "Start Teams App Locally",
             "dependsOn": [
                 "Validate prerequisites",
+                "Install dependencies",
                 "Start local tunnel",
                 "Provision",
                 "Deploy"
@@ -31,6 +32,18 @@
                     9239 // app inspector port for Node.js debugger
                 ]
             }
+        },
+        {
+            "label": "Install dependencies",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": [
+                "-m",
+                "pip",
+                "install",
+                "-r",
+                "requirements.txt"
+            ],
         },
         {
             // Start the local tunnel service to forward public URL to local port and inspect traffic.
