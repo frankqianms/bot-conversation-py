@@ -1,0 +1,6 @@
+env/
+env/.env.*
+.env
+teams_app_manifest/build/
+.venv/
+__pycache__/
