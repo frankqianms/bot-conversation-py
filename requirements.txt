@@ -6,4 +6,7 @@ botbuilder.schema
 aiohttp
 langchain
 openapi_schema_pydantic
+openai
+numexpr
+
 
